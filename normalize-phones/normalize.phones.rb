@@ -64,14 +64,19 @@ end
 
 def normalize_phone_number(string)
   stripped_str = string.gsub('(', '').gsub(')', '').gsub('-','').gsub(' ','')
-  if stripped_str.length != 10 || stripped_str.match(/A..z/)
+  if stripped_str.length != 10 || stripped_str[/A-z/]
     return string
   else
-    beginning = stripped_str.slice!(0,3)
-    middle = stripped_str.slice!(0,3)
-    ending = stripped_str.slice!(0,4)
-    normalized = "(#{beginning}) #{middle}-#{ending}"
+    stripped_str.each_char do |char|
+      if !char.respond_to?(:to_i)
+        return string
+      end
+    end
   end
+  beginning = stripped_str.slice!(0,3)
+  middle = stripped_str.slice!(0,3)
+  ending = stripped_str.slice!(0,4)
+  "(#{beginning}) #{middle}-#{ending}"
 end
 
 
