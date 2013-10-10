@@ -10,4 +10,10 @@ class Person
     end
   end
 
+  # def initialize(data)
+  #   data.each do |attrib, val|
+  #     self.instance_variable_set("@#{attrib}", val)
+  #   end
+  # end
+
 end
