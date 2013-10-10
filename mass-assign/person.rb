@@ -6,7 +6,7 @@ class Person
 
   def initialize(data)
     data.each do |attrib, value|
-      self.send("#{attrib}=", value)
+      self.send("#{attrib}=", value) unless !self.respond_to?(attrib.to_sym)
     end
   end
 
