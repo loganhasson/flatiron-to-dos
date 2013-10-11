@@ -4,6 +4,12 @@ class Integer
 
   @@db = SQLite3::Database.new('numerals.db')
 
+  TABLES = ["thousands", "hundreds", "tens", "ones"]
+
+  def tables
+    TABLES
+  end
+
   def pad_me
     num_array = self.to_s.each_char.map {|c| c}
     until num_array.size == 4
@@ -18,19 +24,8 @@ class Integer
       if num == "0"
         nil
       else
-        if i == 3
-          sql = "SELECT result FROM ones WHERE id = ?"
-          @@db.execute(sql, num.to_i).first.flatten
-        elsif i == 2
-          sql = "SELECT result FROM tens WHERE id = ?"
-          @@db.execute(sql, num.to_i).first.flatten
-        elsif i == 1
-          sql = "SELECT result FROM hundreds WHERE id = ?"
-          @@db.execute(sql, num.to_i).first.flatten
-        elsif i == 0
-          sql = "SELECT result FROM thousands WHERE id = ?"
-          @@db.execute(sql, num.to_i).first.flatten
-        end
+        sql = "SELECT result FROM #{self.tables[i]} WHERE id = ?"
+        @@db.execute(sql, num.to_i).first.flatten
       end
     end.compact
 
