@@ -16,14 +16,12 @@ class Integer
   end
 
   def to_roman
-    r_numeral = self.pad_me.each_with_index.map do |num, i|
+    self.pad_me.each_with_index.map do |num, i|
       if num != "0"
         sql = "SELECT result FROM #{self.tables[i]} WHERE id = ?"
         @@db.execute(sql, num.to_i)
       end
-    end
-
-    r_numeral.join
+    end.join
   end
 
 end
