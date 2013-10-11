@@ -29,7 +29,7 @@ class Integer
       end
     end.compact
 
-    r_numeral.join('')
+    r_numeral.join
   end
 
 end
