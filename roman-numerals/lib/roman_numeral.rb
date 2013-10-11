@@ -25,7 +25,7 @@ class Integer
         nil
       else
         sql = "SELECT result FROM #{self.tables[i]} WHERE id = ?"
-        @@db.execute(sql, num.to_i).first.flatten
+        @@db.execute(sql, num.to_i)
       end
     end.compact
 
