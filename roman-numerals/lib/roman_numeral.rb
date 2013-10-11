@@ -12,11 +12,7 @@ class Integer
 
   def pad_me
     num_array = self.to_s.each_char.map {|c| c}
-    until num_array.size == 4
-      num_array.unshift("0")
-    end
-
-    num_array
+    ["0"]*(4 - num_array.size) + num_array
   end
 
   def to_roman
